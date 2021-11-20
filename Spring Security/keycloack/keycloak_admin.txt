@@ -1,0 +1,16 @@
+Username: krissz97
+Password: 12345
+
+run server: go to bin folder and starrt standalone.bat
+
+reasource server
+client secret: 7988e47e-f83d-47a5-803f-cb8327458193
+client_id: spring_security_keycloak_api
+
+
+clinet for auth code:
+cleint secret: dc58f188-aae1-4f77-9f83-51fbaa4ed2e9
+client_id: spring_security_keycloak_client
+
+Front end angular app:
+client_id: spring_security_keycloak_angular_application
