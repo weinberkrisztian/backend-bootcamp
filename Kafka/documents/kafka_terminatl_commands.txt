@@ -1,3 +1,0 @@
-BROKER=localhost:29092
-
-kafkacat -b <broker> -t <topic name>
