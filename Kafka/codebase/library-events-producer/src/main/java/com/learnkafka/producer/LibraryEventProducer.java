@@ -12,6 +12,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -47,7 +48,7 @@ public class LibraryEventProducer {
 
         // get will wait until the future resumes
         try {
-            result = kafkaTemplate.sendDefault(key, value).get();
+            result = kafkaTemplate.sendDefault(key, value).get(1, TimeUnit.SECONDS);
         } catch (ExecutionException | InterruptedException e) {
             log.error("ExecutionException/InterruptedException Sending the Message and the exception is {}", e.getMessage());
             throw e;
