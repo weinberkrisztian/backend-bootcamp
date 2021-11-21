@@ -1,0 +1,9 @@
+BROKER=localhost:29092
+
+-P producer mode
+-C consumer mode
+-f 'Key: %k\nValue: %s\n' for printing out the actual key
+-K <key delimiter>
+-L list the current state of the kafka cluster
+
+kafkacat -b <broker> -t <topic name>
