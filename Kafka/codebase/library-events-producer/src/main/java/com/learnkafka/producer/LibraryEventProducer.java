@@ -13,6 +13,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Component
 @Slf4j
@@ -41,7 +42,7 @@ public class LibraryEventProducer {
         });
     }
 
-    public SendResult<Integer, String> sendLibraryEventSynchronous(LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException {
+    public SendResult<Integer, String> sendLibraryEventSynchronous(LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         Integer key = libraryEvent.getId();
         String value = objectMapper.writeValueAsString(libraryEvent);
         SendResult<Integer, String> result = null;
