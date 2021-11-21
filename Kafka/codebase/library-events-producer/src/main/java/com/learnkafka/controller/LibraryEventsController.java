@@ -21,11 +21,11 @@ public class LibraryEventsController {
     LibraryEventProducer libraryEventProducer;
 
     @PostMapping("/v1/libraryevent")
-    public ResponseEntity<LibraryEvent> postLibraryEvent(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException {
+    public ResponseEntity<LibraryEvent> postLibraryEvent(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException {
 
         // invoke kafka producer
         log.info("before sendLibraryEvent");
-        libraryEventProducer.sendLibraryEvent(libraryEvent);
+        libraryEventProducer.sendLibraryEventSpecificTopic(libraryEvent);
         log.info("after sendLibraryEvent");
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryEvent);
     }
