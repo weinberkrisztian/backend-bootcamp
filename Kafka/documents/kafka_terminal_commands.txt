@@ -9,3 +9,7 @@ ESCAPE on mac: control+D
 -L list the current state of the kafka cluster
 
 kafkacat -b <broker> -t <topic name>
+
+
+specific commands:
+kcat -C  -b 'localhost:39092' -t 'library-events'
