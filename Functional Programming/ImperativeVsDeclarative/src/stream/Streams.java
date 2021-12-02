@@ -210,6 +210,4 @@ public class Streams {
         System.out.println(gpaPartitionSet);
         System.out.println(gpaPartitionSet.get(true));
     }
-
-
 }
