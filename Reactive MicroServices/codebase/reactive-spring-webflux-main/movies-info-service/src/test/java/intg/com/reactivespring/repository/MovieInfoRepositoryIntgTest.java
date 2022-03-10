@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -25,15 +26,19 @@ class MovieInfoRepositoryIntgTest {
     @Autowired
     MovieInfoRepository movieInfoRepository;
 
+    List<MovieInfo> movieinfos;
+
     @BeforeEach
     void setUp() {
 
-        var movieinfos = List.of(new MovieInfo(null, "Batman Begins",
+        movieinfos = List.of(new MovieInfo(null, "Batman Begins",
                         2005, List.of("Christian Bale", "Michael Cane"), LocalDate.parse("2005-06-15")),
                 new MovieInfo(null, "The Dark Knight",
                         2008, List.of("Christian Bale", "HeathLedger"), LocalDate.parse("2008-07-18")),
                 new MovieInfo("abc", "Dark Knight Rises",
-                        2012, List.of("Christian Bale", "Tom Hardy"), LocalDate.parse("2012-07-20")));
+                        2012, List.of("Christian Bale", "Tom Hardy"), LocalDate.parse("2012-07-20")),
+                new MovieInfo(null, "Batman Begins Duplicated",
+                        2005, List.of("Christian Bale Duplicated", "Michael Cane Duplicated"), LocalDate.parse("2005-06-15")));
 
         movieInfoRepository.saveAll(movieinfos).blockLast();
     }
@@ -96,6 +101,16 @@ class MovieInfoRepositoryIntgTest {
 
         StepVerifier.create(movieInfosFlux)
                 .expectNextCount(2)
+                .verifyComplete();
+    }
+
+    @Test
+    void findByYear(){
+        Flux<MovieInfo> findByYearFlux = movieInfoRepository.findByYear(2005);
+
+        StepVerifier.create(findByYearFlux)
+                .assertNext(movieInfo -> movieInfo.getName().equals(movieinfos.get(0).getName()))
+                .assertNext(movieInfoSecond -> movieInfoSecond.getName().equals(movieinfos.get(3).getName()))
                 .verifyComplete();
     }
 }

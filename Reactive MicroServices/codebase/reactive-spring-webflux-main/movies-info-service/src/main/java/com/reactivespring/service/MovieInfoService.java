@@ -34,4 +34,9 @@ public class MovieInfoService {
         log.debug("Received delete request for find movie info by id: {}", movieInfoId);
         return movieInfoRepository.deleteById(movieInfoId).log();
     }
+
+    public Flux<MovieInfo> getMovieInfosByYear(Integer year){
+        log.debug("Received get request for find movie infos by year: {}", year);
+        return movieInfoRepository.findByYear(year);
+    }
 }
