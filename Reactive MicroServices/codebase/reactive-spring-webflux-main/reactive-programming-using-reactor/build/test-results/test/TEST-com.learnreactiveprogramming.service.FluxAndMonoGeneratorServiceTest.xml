@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.learnreactiveprogramming.service.FluxAndMonoGeneratorServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-18T20:21:28" hostname="C02G84QEMD6M.local" time="0.221">
+  <properties/>
+  <testcase name="nameFluxZipTest()" classname="com.learnreactiveprogramming.service.FluxAndMonoGeneratorServiceTest" time="0.221"/>
+  <system-out><![CDATA[21:21:29.067 [Test worker] DEBUG reactor.util.Loggers$LoggerFactory - Using Slf4j logging framework
+21:21:29.092 [Test worker] INFO reactor.Flux.Map.1 - onSubscribe(FluxMap.MapSubscriber)
+21:21:29.096 [Test worker] INFO reactor.Flux.Map.1 - request(unbounded)
+21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(AD14)
+21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(BE25)
+21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(CF36)
+21:21:29.114 [Test worker] INFO reactor.Flux.Map.1 - onComplete()
+21:21:29.115 [Test worker] INFO reactor.Flux.Zip.2 - onSubscribe(FluxZip.ZipCoordinator)
+21:21:29.115 [Test worker] INFO reactor.Flux.Zip.2 - request(unbounded)
+21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(A1)
+21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(B2)
+21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(C3)
+21:21:29.123 [Test worker] INFO reactor.Flux.Zip.2 - onComplete()
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

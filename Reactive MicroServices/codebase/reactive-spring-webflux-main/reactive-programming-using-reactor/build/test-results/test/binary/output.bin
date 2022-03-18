@@ -1,0 +1,13 @@
+d21:21:29.067 [Test worker] DEBUG reactor.util.Loggers$LoggerFactory - Using Slf4j logging framework
+X21:21:29.092 [Test worker] INFO reactor.Flux.Map.1 - onSubscribe(FluxMap.MapSubscriber)
+H21:21:29.096 [Test worker] INFO reactor.Flux.Map.1 - request(unbounded)
+B21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(AD14)
+B21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(BE25)
+B21:21:29.113 [Test worker] INFO reactor.Flux.Map.1 - onNext(CF36)
+B21:21:29.114 [Test worker] INFO reactor.Flux.Map.1 - onComplete()
+Y21:21:29.115 [Test worker] INFO reactor.Flux.Zip.2 - onSubscribe(FluxZip.ZipCoordinator)
+H21:21:29.115 [Test worker] INFO reactor.Flux.Zip.2 - request(unbounded)
+@21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(A1)
+@21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(B2)
+@21:21:29.122 [Test worker] INFO reactor.Flux.Zip.2 - onNext(C3)
+B21:21:29.123 [Test worker] INFO reactor.Flux.Zip.2 - onComplete()
