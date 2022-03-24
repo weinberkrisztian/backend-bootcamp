@@ -1,5 +1,6 @@
 package com.reactivespring.handler;
 
+import com.mongodb.internal.connection.Server;
 import com.reactivespring.domain.Review;
 import com.reactivespring.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class ReviewHandler {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    static Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+
     public Mono<ServerResponse> addReview(ServerRequest request) {
         return request.bodyToMono(Review.class)
                 .flatMap(reviewRepository::save)
@@ -23,7 +26,38 @@ public class ReviewHandler {
     }
 
     public Mono<ServerResponse> listReviews() {
-        Flux<Review> reviewFlux = reviewRepository.findAll();
+        var reviewFlux = reviewRepository.findAll();
         return ServerResponse.ok().body(reviewFlux, Review.class);
+    }
+
+    public Mono<ServerResponse> updateReview(ServerRequest request) {
+        String reviewId = request.pathVariable("id");
+
+        Mono<Review> review = reviewRepository.findById(reviewId);
+
+        return review.flatMap(rev -> request.bodyToMono(Review.class)
+                .map(reqRev -> {
+                    reqRev.setReviewId(reviewId);
+                    return reqRev;
+                })
+                .flatMap(reviewRepository::save)
+                .flatMap(updatedReview -> ServerResponse.status(HttpStatus.OK).bodyValue(updatedReview))
+                .switchIfEmpty(notFound));
+    }
+
+    public Mono<ServerResponse> deleteReview(ServerRequest request) {
+        String reviewId = request.pathVariable("id");
+
+        return reviewRepository.findById(reviewId)
+                        .flatMap(review -> reviewRepository.delete(review))
+                                .then(ServerResponse.status(HttpStatus.NO_CONTENT).build());
+    }
+
+    public Mono<ServerResponse> getReviewById(ServerRequest request) {
+        String reviewId = request.pathVariable("id");
+
+        return reviewRepository.findById(reviewId)
+                .flatMap(ServerResponse.status(HttpStatus.OK)::bodyValue)
+                .switchIfEmpty(notFound);
     }
 }
