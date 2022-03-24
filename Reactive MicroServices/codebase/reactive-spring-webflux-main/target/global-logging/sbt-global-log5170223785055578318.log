@@ -1,0 +1,47 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[info] Updated file /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project/build.properties: set sbt.version to 1.5.8
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.5.8 (AdoptOpenJDK Java 11.0.11)
+[debug] Load.defaultLoad until apply took 194.788367ms
+[debug]           Load.loadUnit: plugins took 75.114116ms
+[debug]           Load.loadUnit: defsScala took 0.325349ms
+[debug] [Loading] Scanning directory /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 16.582959 ms
+[debug]               Load.resolveProject(reactive-spring-webflux-main-build) took 54.267146ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id reactive-spring-webflux-main-build, base: /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project, plugins: List(<none>))) took 104.047874ms
+[debug] [Loading] Done in /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project, returning: (reactive-spring-webflux-main-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 122.053231ms
+[debug]           Load.loadUnit: cleanEvalClasses took 0.266094ms
+[debug]         Load.loadUnit(file:/Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive%20MicroServices/codebase/reactive-spring-webflux-main/project/, ...) took 203.254048ms
+[debug]       Load.apply: load took 472.600144ms
+[debug]       Load.apply: resolveProjects took 7.317425ms
+[debug]       Load.apply: finalTransforms took 65.03446ms
+[debug]       Load.apply: config.delegates took 7.488376ms
+[debug]       Load.apply: Def.make(settings)... took 351.78927ms
+[debug]       Load.apply: structureIndex took 79.227403ms
+[debug]       Load.apply: mkStreams took 1.634104ms
+[info] loading project definition from /Users/weinber.krisztian/Documents/learning/backend-bootcamp/Reactive MicroServices/codebase/reactive-spring-webflux-main/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
