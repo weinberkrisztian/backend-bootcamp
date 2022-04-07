@@ -71,6 +71,20 @@ public class ReviewIntgTest {
 
     @Test
     @SneakyThrows
+    void addReviewBadParameters() {
+
+        Review testReview = new Review("10", 1L, "Awesome Movie", 9.0);
+
+        client.post()
+                .uri(REVIEWS_URL + "/add")
+                .bodyValue(testReview)
+                .exchange()
+                .expectStatus().isBadRequest();
+
+    }
+
+    @Test
+    @SneakyThrows
     void getAllReviews() {
         client.get()
                 .uri(REVIEWS_URL)
