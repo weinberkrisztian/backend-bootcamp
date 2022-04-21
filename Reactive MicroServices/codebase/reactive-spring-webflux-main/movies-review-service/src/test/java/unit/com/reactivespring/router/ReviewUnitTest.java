@@ -1,6 +1,7 @@
 package com.reactivespring.router;
 
 import com.reactivespring.domain.Review;
+import com.reactivespring.exception.GlobalErrorHandler;
 import com.reactivespring.handler.ReviewHandler;
 import com.reactivespring.repository.ReviewRepository;
 import lombok.SneakyThrows;
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @WebFluxTest
-@ContextConfiguration(classes = {ReviewRouter.class, ReviewHandler.class})
+@ContextConfiguration(classes = {ReviewRouter.class, ReviewHandler.class, GlobalErrorHandler.class})
 @AutoConfigureWebTestClient
 @ExtendWith(MockitoExtension.class)
 class ReviewUnitTest {
@@ -58,6 +59,42 @@ class ReviewUnitTest {
                 .expectStatus().isOk()
                 .expectBodyList(Review.class)
                 .value(reviews -> assertEquals(reviewsList.size(),reviews.size()));
+    }
+
+    @Test
+    @SneakyThrows
+    void addReviewValidationFail(){
+        Review review = new Review(null, null, "Awesome Movie", 9.0);
+
+        client.post()
+                .uri(REVIEWS_URL + "/add")
+                .bodyValue(review)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(String.class)
+                .consumeWith(stringEntityExchangeResult -> {
+                    String responseBody = stringEntityExchangeResult.getResponseBody();
+                    assertEquals("rating.movieInfoId : must not be null", responseBody);
+                });
+
+    }
+
+    @Test
+    @SneakyThrows
+    void reviewFindByIdNotFound(){
+        Review review = new Review("11", 1L, "Awesome Movie", 9.0);
+
+        when(reviewRepository.findById(review.getReviewId())).thenReturn(Mono.empty());
+
+        client.put()
+                .uri(REVIEWS_URL + "/{id}", review.getReviewId())
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(String.class)
+                .consumeWith(stringEntityExchangeResult -> {
+                    String responseBody = stringEntityExchangeResult.getResponseBody();
+                    assertEquals("Review not found with the following id " + review.getReviewId(), responseBody);
+                });
     }
 
     @Test

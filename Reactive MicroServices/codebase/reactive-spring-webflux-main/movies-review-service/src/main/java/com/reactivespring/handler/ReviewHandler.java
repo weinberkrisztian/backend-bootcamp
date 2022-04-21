@@ -2,6 +2,7 @@ package com.reactivespring.handler;
 
 import com.reactivespring.domain.Review;
 import com.reactivespring.exception.ReviewDataException;
+import com.reactivespring.exception.ReviewNotFoundException;
 import com.reactivespring.repository.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.ConstraintViolation;
@@ -56,7 +58,8 @@ public class ReviewHandler {
     public Mono<ServerResponse> updateReview(ServerRequest request) {
         String reviewId = request.pathVariable("id");
 
-        Mono<Review> review = reviewRepository.findById(reviewId);
+        Mono<Review> review = reviewRepository.findById(reviewId)
+                .switchIfEmpty(Mono.error(new ReviewNotFoundException("Review not found with the following id " + reviewId)));
 
         return review.flatMap(rev -> request.bodyToMono(Review.class)
                 .map(reqRev -> {
@@ -82,5 +85,16 @@ public class ReviewHandler {
         return reviewRepository.findById(reviewId)
                 .flatMap(ServerResponse.status(HttpStatus.OK)::bodyValue)
                 .switchIfEmpty(notFound);
+    }
+
+    public Mono<ServerResponse> getReviewsByMovieInfoId(ServerRequest request){
+        var movieInfoId = request.queryParam("movieInfoId");
+        Flux<Review> movieReviews;
+        if(movieInfoId.isPresent()){
+            movieReviews = reviewRepository.findByMovieInfoId(Long.valueOf(movieInfoId.get()));
+        } else {
+            movieReviews = reviewRepository.findAll();
+        }
+        return ServerResponse.ok().body(movieReviews, Review.class);
     }
 }

@@ -16,13 +16,16 @@ public class ReviewRouter {
     public RouterFunction<ServerResponse> reviewsRoute(ReviewHandler handler) {
 
         return route()
-                .nest(path("/v1/review"), builder -> {
-                    builder.GET("", request -> handler.listReviews())
-                            .POST("/add", request -> handler.addReview(request))
-                            .PUT("/{id}", request -> handler.updateReview(request))
-                            .DELETE("/{id}", request -> handler.deleteReview(request))
-                            .GET("/{id}", request -> handler.getReviewById(request));
-                })
+                .nest(path("/v1/review"), builder ->
+                        builder.GET("", request -> request.queryParam("movieInfoId")
+                                        .map(id -> handler.getReviewsByMovieInfoId(request))
+                                        .orElse(handler.listReviews())
+                                )
+                                .POST("/add", request -> handler.addReview(request))
+                                .PUT("/{id}", request -> handler.updateReview(request))
+                                .DELETE("/{id}", request -> handler.deleteReview(request))
+                                .GET("/{id}", request -> handler.getReviewById(request))
+                )
                 .GET("/v1/hello", request -> ServerResponse.ok().bodyValue("hello functional web"))
                 .build();
     }
