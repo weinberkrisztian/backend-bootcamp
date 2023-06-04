@@ -1,0 +1,5 @@
+-- GET ALL REVIEWS
+curl -X GET http://localhost:8081/v1/review
+
+-- SAVE REVIEW
+curl -X POST http://localhost:8081/v1/review/add --header 'Content-Type: application/json' --data "{\"movieInfoId\":\"1\",\"comment\":\"This is such a nice POST request\",\"rating\":\"10.0\"}"
